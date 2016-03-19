@@ -1,9 +1,12 @@
 package com.matheus.isnaldo.calc;
 
+import com.matheus.isnaldo.calc.R;
+import com.matheus.isnaldo.calc.R.id;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -13,7 +16,11 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class MainActivity extends Activity implements OnClickListener  {
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.common.api.GoogleApiClient;
+
+public class MainActivity extends Activity implements OnClickListener {
 
 //public abstract class Calculadora extends Activity implements OnClickListener {
 
@@ -55,15 +62,23 @@ public class MainActivity extends Activity implements OnClickListener  {
 
     /* componente button que fecha o aplicativo */
     private Button bt_sair;
-
-
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        inicializar();
+        listeners();
 
     }
+
+
+
 
     private void inicializar() {
 
@@ -93,7 +108,31 @@ public class MainActivity extends Activity implements OnClickListener  {
         bt_sair = (Button) findViewById(R.id.bt_sair);
 
     }
+    private void listeners() {
 
+
+        bt_1.setOnClickListener(this);
+        bt_2.setOnClickListener(this);
+        bt_3.setOnClickListener(this);
+        bt_4.setOnClickListener(this);
+        bt_5.setOnClickListener(this);
+        bt_6.setOnClickListener(this);
+        bt_7.setOnClickListener(this);
+        bt_8.setOnClickListener(this);
+        bt_9.setOnClickListener(this);
+        bt_ponto.setOnClickListener(this);
+
+        bt_limpar.setOnClickListener(this);
+        bt_sair.setOnClickListener(this);
+
+        bt_soma.setOnClickListener(this);
+        bt_subt.setOnClickListener(this);
+        bt_multi.setOnClickListener(this);
+        bt_divi.setOnClickListener(this);
+
+        bt_igual.setOnClickListener(this);
+
+    }
     //tecladonumerocp
     private void tecladoNumerico(int leNumero) {
 
@@ -112,7 +151,7 @@ public class MainActivity extends Activity implements OnClickListener  {
 
     }
 
-    //Limpa tudo
+        //Limpa tudo
     private void limparVisor() {
 
         txt_visor.setText("");
@@ -157,11 +196,12 @@ public class MainActivity extends Activity implements OnClickListener  {
 
                 operador2 = operador1 + Double.parseDouble(txt_visor.getText().toString().trim());
 
-            } else if (operadores == "-") {
+            } else if (operadores == "-" ){
 
                 operador2 = operador1 - Double.parseDouble(txt_visor.getText().toString().trim());
 
-            } else if (operadores == "*") {
+            }
+            if (operadores == "*") {
 
                 operador2 = operador1 * Double.parseDouble(txt_visor.getText().toString().trim());
 
@@ -190,95 +230,103 @@ public class MainActivity extends Activity implements OnClickListener  {
     }
 
     @Override
-    public void onClick(View v) {
-
-        switch (v.getId()) {
-
-            case R.id.bt_0:
-
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case id.bt_0:
                 tecladoNumerico(0);
                 break;
 
-            case R.id.bt_1:
+            case id.bt_1:
 
                 tecladoNumerico(1);
                 break;
 
-            case R.id.bt_2:
+            case id.bt_2:
 
                 tecladoNumerico(2);
                 break;
 
-            case R.id.bt_3:
+            case id.bt_3:
 
                 tecladoNumerico(3);
                 break;
 
-            case R.id.bt_4:
+            case id.bt_4:
 
                 tecladoNumerico(4);
                 break;
 
-            case R.id.bt_5:
+            case id.bt_5:
 
                 tecladoNumerico(5);
                 break;
 
-            case R.id.bt_6:
+            case id.bt_6:
 
                 tecladoNumerico(6);
                 break;
 
-            case R.id.bt_7:
+            case id.bt_7:
 
                 tecladoNumerico(7);
                 break;
 
-            case R.id.bt_8:
+            case id.bt_8:
 
                 tecladoNumerico(8);
                 break;
 
-            case R.id.bt_9:
+            case id.bt_9:
 
                 tecladoNumerico(9);
                 break;
 
-            case R.id.bt_limpar:
+            case id.bt_limpar:
 
                 limparVisor();
                 break;
 
-            case R.id.bt_igual:
+            case id.bt_igual:
 
                 igual();
                 break;
 
+            case id.bt_ponto:
 
+                ponto(".");
+                break;
 
+            case  id.bt_sair:
 
-            case R.id.bt_soma:
+                fecharAplicacao();
+                break;
+
+            case id.bt_soma:
 
                 operacoes("+");
                 break;
 
-            case R.id.bt_subt:
+            case id.bt_subt:
 
                 operacoes("-");
                 break;
 
-            case R.id.bt_multi:
+            case id.bt_multi:
 
                 operacoes("*");
                 break;
 
-            case R.id.bt_divi:
+            case id.bt_divi:
 
                 operacoes("/");
                 break;
 
         }
 
+
     }
 
-     }
+
+
+
+}
