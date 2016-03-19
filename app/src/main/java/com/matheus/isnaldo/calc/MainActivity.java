@@ -1,24 +1,15 @@
 package com.matheus.isnaldo.calc;
 
-import com.matheus.isnaldo.calc.R;
-import com.matheus.isnaldo.calc.R.id;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.common.api.GoogleApiClient;
+import com.matheus.isnaldo.calc.R.id;
 
 public class MainActivity extends Activity implements OnClickListener {
 
@@ -228,6 +219,45 @@ public class MainActivity extends Activity implements OnClickListener {
         txt_visor.setText(String.valueOf(operador2));
 
     }
+    /* Função para inserção do ponto */
+    private void ponto(String ponto){
+
+        txt_visor.setText(txt_visor.getText().toString() + ponto);
+
+    }
+    private void fecharAplicacao(){
+
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+
+        dialog.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface arg0, int arg1) {
+
+                MainActivity.this.finish();
+
+            }
+
+        });
+
+        dialog.setNegativeButton("Não", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                dialog.dismiss();
+
+            }
+
+        });
+
+        dialog.setTitle("Fechar");
+        dialog.setMessage("Deseja realmente fechar a aplicação?");
+        dialog.setIcon(android.R.drawable.ic_menu_close_clear_cancel);
+        dialog.show();
+
+    }
+
 
     @Override
     public void onClick(View view) {
